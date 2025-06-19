@@ -43,7 +43,7 @@
     "tags": [],
     "title": "The Problem With Fixing Yourself",
     "video": [
-      "https://joshstrupp-dot-com.github.io/thesis-problem-presentation/demo.mp4"
+      "https://github.com/joshstrupp-dot-com/the-problem-presentation/blob/main/demo.mp4?raw=true"
     ],
     "year": 2025
   },
@@ -87,7 +87,7 @@
     "student_url": "",
     "subtitle": "",
     "tags": [],
-    "title": "Grocery Signery: Scenery Behind NYC Storefront Signs",
+    "title": "Grocery Signery",
     "video": [
       "https://github.com/monsichasris/thesis/blob/main/demo.mp4?raw=true"
     ],
@@ -113,7 +113,7 @@
     "author": ["Harshita Chakravadhanula"],
     "category": ["thesis"],
     "description": "This project explores female characters in literary epics across time and culture, analyzing their traits to uncover recurring archetypes. What do cultures expect of women—and how much do those expectations differ across civilizations? By studying epics as repositories of collective values, this research investigates how idealized models of femininity are constructed. It asks whether these cultural ideals become internalized, shaping the inner voice through which women learn to govern themselves. Drawing from a diverse and global selection of epic texts, the project maps the persistence and evolution of feminine archetypes across mythology, religion, nationhood, and time.",
-    "image": ["https://hushbrush.github.io/thesis/preview.png"],
+    "image": ["thesis-2025/Harshita.png"],
     "project_repo": "https://github.com/hushbrush/thesis",
     "project_url": "https://hushbrush.github.io/thesis/",
     "student_url": "",
@@ -137,6 +137,136 @@
     "video": [
       "https://github.com/NourSaf/MSDV-thesis-25/blob/main/public/demovideo/demo.mp4?raw=true"
     ],
+    "year": 2025
+  },
+  {
+    "author": ["Katherine Chui"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "https://github.com/chuik633/SoundStories",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Sound Stories: Visualizing Music in Film",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Annie Lee"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "https://github.com/annielee0313/msdv-thesis",
+    "project_url": "https://annielee0313.github.io/msdv-thesis/",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Fluidnotes: Gender and Fragrance",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Ani Matevosian"],
+    "category": ["thesis"],
+    "description": "Genocide denial comments become data in this analysis of Armenian Genocide narratives circulating online. Examining over 10,000 YouTube comments alongside official Turkish government statements, this project visualizes how state narratives and propaganda shape public discourse. The interactive visualization reveals which government denial narratives are frequently echoed online, displaying both the scale and intensification of these statements. Machine learning classification identifies twelve distinct rhetorical stances, from explicit denial to minimization and justification. The comments form a searchable and downloadable archive—filterable by year, likes, and video source—transforming toxic content into a resource for studying genocide denial in digital spaces.",
+    "image": ["thesis-2025/Ani.png"],
+    "project_repo": "https://animatevosian398.github.io/thesis-2025/",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Narratives of Truth and Denial",
+    "video": [
+      "https://github.com/animatevosian398/thesis-2025/blob/main/public/Demo.mp4?raw=true"
+    ],
+    "year": 2025
+  },
+  {
+    "author": ["Steph Wu"],
+    "category": ["thesis"],
+    "description": "What began as a co-evolutionary relationship between humans and wolves over 130,000 years ago has given rise to specialized working dog breeds whose deeply entwined skills and sensibilities remain irreplaceable—even in our technological age. These aren't just good boys and girls—they co-evolved with us, challenging the very notion of human exceptionalism. Dogs may just be the smartest partnership we've ever made as a species.",
+    "image": ["thesis-2025/Steph.png"],
+    "project_repo": "https://github.com/stephhwu/parsonsthesis-2025",
+    "project_url": "https://stephhwu.github.io/parsonsthesis-2025/",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Dogs with Jobs",
+    "video": [
+      "https://github.com/stephhwu/parsonsthesis-2025/blob/main/public/steph-thesis-2025-video.mp4?raw=true"
+    ],
+    "year": 2025
+  },
+  {
+    "author": ["Sam Lavigne"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "https://github.com/visualizedata/major-studio-2-sp25",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "n/a",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Ian Yu"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "In the Age of AI",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Sanidhya Sharma"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Failure To Thrive Will Kill You",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Sophie Graves"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Sole Survivor",
+    "video": [],
+    "year": 2025
+  },
+  {
+    "author": ["Livia Ramos"],
+    "category": ["thesis"],
+    "description": "",
+    "image": [],
+    "project_repo": "",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Bite The Hand That Feeds You",
+    "video": [],
     "year": 2025
   }
 ]
