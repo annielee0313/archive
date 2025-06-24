@@ -31,7 +31,7 @@ jobs:
       # check out files tracked by git
       # ------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # ------------------------------------------
       # set up pnpm
@@ -44,17 +44,27 @@ jobs:
       # find node version
       # ------------------------------------------
       - name: Determine node version
-        run: test -f .nvmrc && echo ::set-output name=NVMRC::$(cat .nvmrc)
+        run: test -f .nvmrc && echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
         id: nvm
 
       # ------------------------------------------
-      # setup node env
+      # setup node env with cache fallback
       # ------------------------------------------
       - name: Setup node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
           cache: 'pnpm'
+        continue-on-error: true
+
+      # ------------------------------------------
+      # retry node setup without cache if failed
+      # ------------------------------------------
+      - name: Setup node.js (retry without cache)
+        if: failure()
+        uses: actions/setup-node@v4
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       # ------------------------------------------
       # install dependencies
