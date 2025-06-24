@@ -48,20 +48,9 @@ jobs:
         id: nvm
 
       # ------------------------------------------
-      # setup node env with cache fallback
+      # setup node env (no cache to avoid 503)
       # ------------------------------------------
       - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '${{ steps.nvm.outputs.NVMRC }}'
-          cache: 'pnpm'
-        continue-on-error: true
-
-      # ------------------------------------------
-      # retry node setup without cache if failed
-      # ------------------------------------------
-      - name: Setup node.js (retry without cache)
-        if: failure()
         uses: actions/setup-node@v4
         with:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
