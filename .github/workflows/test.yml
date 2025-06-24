@@ -28,10 +28,10 @@ jobs:
     # --------------------------------------------
     steps:
       # ------------------------------------------
-      # check out files tracked by git
+      # check out files tracked by git (minimal)
       # ------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       # ------------------------------------------
       # find node version
@@ -41,22 +41,24 @@ jobs:
         id: nvm
 
       # ------------------------------------------
-      # install node manually using nvm
+      # setup using fnm (faster alternative to nvm)
       # ------------------------------------------
-      - name: Install Node.js
+      - name: Setup Node.js via fnm
         run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm install ${{ steps.nvm.outputs.NVMRC }}
-          nvm use ${{ steps.nvm.outputs.NVMRC }}
-          echo "$HOME/.nvm/versions/node/v${{ steps.nvm.outputs.NVMRC }}/bin" >> $GITHUB_PATH
+          curl -fsSL https://fnm.vercel.app/install | bash
+          export PATH="$HOME/.fnm:$PATH"
+          eval "$(fnm env --use-on-cd)"
+          fnm install ${{ steps.nvm.outputs.NVMRC }}
+          fnm use ${{ steps.nvm.outputs.NVMRC }}
+          echo "$HOME/.fnm/node-versions/v${{ steps.nvm.outputs.NVMRC }}/installation/bin" >> $GITHUB_PATH
 
       # ------------------------------------------
-      # install pnpm
+      # verify node and install pnpm
       # ------------------------------------------
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
+      - name: Setup pnpm
+        run: |
+          node --version
+          npm install -g pnpm@latest
 
       # ------------------------------------------
       # install dependencies
