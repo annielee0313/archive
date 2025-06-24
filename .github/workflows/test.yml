@@ -3,11 +3,6 @@
 # test workflow
 name: Test
 
-# ------------------------------------------------
-# this workflow will run
-# • anytime a commit is made to `in-progress`
-# • anytime a pull request is opened against main
-# ------------------------------------------------
 on:
   push:
     branches:
@@ -18,74 +13,43 @@ on:
 
 jobs:
   test:
-    # --------------------------------------------
-    # workflow runs on an ubuntu image
-    # --------------------------------------------
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04  # Use specific version to avoid cache issues
 
-    # --------------------------------------------
-    # define the steps we want to run
-    # --------------------------------------------
     steps:
-      # ------------------------------------------
-      # check out files tracked by git (minimal)
-      # ------------------------------------------
-      - name: Checkout
-        uses: actions/checkout@v3
+      # Use git directly instead of actions/checkout
+      - name: Checkout code
+        run: |
+          git clone ${{ github.server_url }}/${{ github.repository }} .
+          git checkout ${{ github.sha }}
 
-      # ------------------------------------------
-      # find node version
-      # ------------------------------------------
+      # Rest of your workflow using manual Node setup
       - name: Determine node version
         run: test -f .nvmrc && echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
         id: nvm
 
-      # ------------------------------------------
-      # setup using fnm (faster alternative to nvm)
-      # ------------------------------------------
-      - name: Setup Node.js via fnm
+      - name: Setup Node.js manually
         run: |
-          curl -fsSL https://fnm.vercel.app/install | bash
-          export PATH="$HOME/.fnm:$PATH"
-          eval "$(fnm env --use-on-cd)"
-          fnm install ${{ steps.nvm.outputs.NVMRC }}
-          fnm use ${{ steps.nvm.outputs.NVMRC }}
-          echo "$HOME/.fnm/node-versions/v${{ steps.nvm.outputs.NVMRC }}/installation/bin" >> $GITHUB_PATH
+          wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm install ${{ steps.nvm.outputs.NVMRC }}
+          nvm alias default ${{ steps.nvm.outputs.NVMRC }}
+          echo "$HOME/.nvm/versions/node/v${{ steps.nvm.outputs.NVMRC }}/bin" >> $GITHUB_PATH
 
-      # ------------------------------------------
-      # verify node and install pnpm
-      # ------------------------------------------
-      - name: Setup pnpm
-        run: |
-          node --version
-          npm install -g pnpm@latest
+      - name: Install pnpm
+        run: npm install -g pnpm@latest
 
-      # ------------------------------------------
-      # install dependencies
-      # ------------------------------------------
       - name: Install dependencies
         run: pnpm install
 
-      # ------------------------------------------
-      # check formatting
-      # ------------------------------------------
       - name: Run formatter
         run: pnpm format
 
-      # ------------------------------------------
-      # check linting
-      # ------------------------------------------
       - name: Run linter
         run: pnpm lint
 
-      # ------------------------------------------
-      # run unit tests
-      # ------------------------------------------
       - name: Run unit tests
         run: pnpm test
 
-      # ------------------------------------------
-      # build assets
-      # ------------------------------------------
       - name: Build assets
         run: pnpm build
