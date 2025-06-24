@@ -3,6 +3,11 @@
 # test workflow
 name: Test
 
+# ------------------------------------------------
+# this workflow will run
+# • anytime a commit is made to `in-progress`
+# • anytime a pull request is opened against main
+# ------------------------------------------------
 on:
   push:
     branches:
@@ -13,43 +18,73 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04  # Use specific version to avoid cache issues
+    # --------------------------------------------
+    # workflow runs on an ubuntu image
+    # --------------------------------------------
+    runs-on: ubuntu-latest
+    container:
+      image: node:18  # Use Docker container to bypass action caching
 
+    # --------------------------------------------
+    # define the steps we want to run
+    # --------------------------------------------
     steps:
-      # Use git directly instead of actions/checkout
+      # ------------------------------------------
+      # manual git checkout to avoid actions/checkout cache
+      # ------------------------------------------
       - name: Checkout code
         run: |
-          git clone ${{ github.server_url }}/${{ github.repository }} .
+          apt-get update && apt-get install -y git
+          git clone https://github.com/${{ github.repository }}.git .
           git checkout ${{ github.sha }}
 
-      # Rest of your workflow using manual Node setup
+      # ------------------------------------------
+      # find node version (keeping your NVMRC reference)
+      # ------------------------------------------
       - name: Determine node version
         run: test -f .nvmrc && echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
         id: nvm
 
-      - name: Setup Node.js manually
+      # ------------------------------------------
+      # install specific node version if different
+      # ------------------------------------------
+      - name: Verify Node version
         run: |
-          wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm install ${{ steps.nvm.outputs.NVMRC }}
-          nvm alias default ${{ steps.nvm.outputs.NVMRC }}
-          echo "$HOME/.nvm/versions/node/v${{ steps.nvm.outputs.NVMRC }}/bin" >> $GITHUB_PATH
+          echo "Required: ${{ steps.nvm.outputs.NVMRC }}"
+          echo "Current: $(node --version)"
 
+      # ------------------------------------------
+      # install pnpm
+      # ------------------------------------------
       - name: Install pnpm
         run: npm install -g pnpm@latest
 
+      # ------------------------------------------
+      # install dependencies
+      # ------------------------------------------
       - name: Install dependencies
         run: pnpm install
 
+      # ------------------------------------------
+      # check formatting
+      # ------------------------------------------
       - name: Run formatter
         run: pnpm format
 
+      # ------------------------------------------
+      # check linting
+      # ------------------------------------------
       - name: Run linter
         run: pnpm lint
 
+      # ------------------------------------------
+      # run unit tests
+      # ------------------------------------------
       - name: Run unit tests
         run: pnpm test
 
+      # ------------------------------------------
+      # build assets
+      # ------------------------------------------
       - name: Build assets
         run: pnpm build
