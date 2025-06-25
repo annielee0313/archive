@@ -1,78 +1,52 @@
-# --------------------------------------------
-# define the steps we want to run
-# --------------------------------------------
-steps:
-  # ------------------------------------------
-  # check out files tracked by git
-  # ------------------------------------------
-  - name: Checkout
-    uses: actions/checkout@v4
+name: Test
+on:
+  push:
+    branches:
+      - in-progress
+  pull_request:
+    branches:
+      - main
 
-  # ------------------------------------------
-  # set up pnpm (no internal cache)
-  # ------------------------------------------
-  - name: Setup pnpm
-    uses: pnpm/action-setup@v4
-    with:
-      version: latest
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-  # ------------------------------------------
-  # find node version
-  # ------------------------------------------
-  - name: Determine node version
-    id: nvm
-    run: |
-      if [ -f .nvmrc ]; then
-        echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-      fi
+    steps:
+      # checkout
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  # ------------------------------------------
-  # setup node.js (disable built-in cache)
-  # ------------------------------------------
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: ${{ steps.nvm.outputs.NVMRC }}
-      cache: 'none'
+      # determine node version
+      - name: Determine node version
+        id: nvm
+        run: |
+          if [ -f .nvmrc ]; then
+            echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+          fi
 
-  # ------------------------------------------
-  # manual pnpm store cache (safe-fail on 503)
-  # ------------------------------------------
-  - name: Cache pnpm store
-    uses: actions/cache@v4
-    with:
-      path: ~/.pnpm-store
-      key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      restore-keys: |
-        ${{ runner.os }}-pnpm-store-
-    continue-on-error: true
+      # setup node (no built-in cache)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.nvm.outputs.NVMRC }}
+          cache: 'none'
 
-  # ------------------------------------------
-  # install dependencies
-  # ------------------------------------------
-  - name: Install dependencies
-    run: pnpm install
+      # install pnpm manually (avoids pnpm/action‐setup caching)
+      - name: Install pnpm
+        run: npm install -g pnpm@latest
 
-  # ------------------------------------------
-  # check formatting
-  # ------------------------------------------
-  - name: Run formatter
-    run: pnpm format
+      # install deps & run tasks
+      - name: Install dependencies
+        run: pnpm install
 
-  # ------------------------------------------
-  # check linting
-  # ------------------------------------------
-  - name: Run linter
-    run: pnpm lint
+      - name: Run formatter
+        run: pnpm format
 
-  # ------------------------------------------
-  # run unit tests
-  # ------------------------------------------
-  - name: Run unit tests
-    run: pnpm test
+      - name: Run linter
+        run: pnpm lint
 
-  # ------------------------------------------
-  # build assets
-  # ------------------------------------------
-  - name: Build assets
-    run: pnpm build
+      - name: Run unit tests
+        run: pnpm test
+
+      - name: Build assets
+        run: pnpm build
