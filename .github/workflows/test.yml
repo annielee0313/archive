@@ -9,7 +9,7 @@ steps:
     uses: actions/checkout@v4
 
   # ------------------------------------------
-  # set up pnpm
+  # set up pnpm (no internal cache)
   # ------------------------------------------
   - name: Setup pnpm
     uses: pnpm/action-setup@v4
@@ -27,24 +27,21 @@ steps:
       fi
 
   # ------------------------------------------
-  # setup node env (no built-in cache)
+  # setup node.js (disable built-in cache)
   # ------------------------------------------
-  - name: Setup node.js
+  - name: Setup Node.js
     uses: actions/setup-node@v4
     with:
       node-version: ${{ steps.nvm.outputs.NVMRC }}
+      cache: 'none'
 
   # ------------------------------------------
-  # manual pnpm cache (safe-fail on 503)
+  # manual pnpm store cache (safe-fail on 503)
   # ------------------------------------------
-  - name: Get pnpm store path
-    id: pnpm-store
-    run: echo "STORE=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-
   - name: Cache pnpm store
     uses: actions/cache@v4
     with:
-      path: ${{ steps.pnpm-store.outputs.STORE }}
+      path: ~/.pnpm-store
       key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       restore-keys: |
         ${{ runner.os }}-pnpm-store-
