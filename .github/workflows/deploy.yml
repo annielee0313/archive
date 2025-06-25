@@ -10,7 +10,7 @@ name: Deploy
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 jobs:
   deploy:
@@ -27,7 +27,15 @@ jobs:
         uses: actions/checkout@v4
 
       # ------------------------------------------
-      # determine node version
+      # set up pnpm
+      # ------------------------------------------
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      # ------------------------------------------
+      # find node version
       # ------------------------------------------
       - name: Determine node version
         id: nvm
@@ -37,19 +45,12 @@ jobs:
           fi
 
       # ------------------------------------------
-      # setup node.js (no cache)
+      # setup node.js (no cache parameter)
       # ------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvm.outputs.NVMRC }}
-          cache: 'none'
-
-      # ------------------------------------------
-      # install pnpm manually (no action cache)
-      # ------------------------------------------
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
 
       # ------------------------------------------
       # install dependencies
@@ -82,8 +83,7 @@ jobs:
         run: pnpm build
 
       # ------------------------------------------
-      # deploy: this step pushes our dist folder
-      # to GitHub Pages
+      # deploy: this step pushes our dist folder to GitHub Pages
       # ------------------------------------------
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
