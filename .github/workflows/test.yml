@@ -9,54 +9,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    # Run all steps inside a Node Docker container—no Actions caching at all
+    container:
+      image: node:18
+
     steps:
-      # ------------------------------------------
-      # checkout repository
-      # ------------------------------------------
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # ------------------------------------------
-      # read Node version from .nvmrc
-      # ------------------------------------------
-      - name: Determine node version
-        id: nvm
-        run: |
-          echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      - name: Verify Node version
+        run: node --version
 
-      # ------------------------------------------
-      # setup Node.js (disable internal cache)
-      # ------------------------------------------
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ steps.nvm.outputs.NVMRC }}
-          cache: 'none'
-
-      # ------------------------------------------
-      # cache pnpm store (safe-fail on 503)
-      # ------------------------------------------
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-        continue-on-error: true
-
-      # ------------------------------------------
-      # install pnpm and dependencies
-      # ------------------------------------------
       - name: Install pnpm
         run: npm install -g pnpm@latest
 
       - name: Install dependencies
         run: pnpm install
 
-      # ------------------------------------------
-      # run tasks
-      # ------------------------------------------
       - name: Run formatter
         run: pnpm format
 
