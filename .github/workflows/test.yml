@@ -1,90 +1,81 @@
---- # ------------------------------------------------
-# ------------------------------------------------
-# test workflow
-name: Test
+# --------------------------------------------
+# define the steps we want to run
+# --------------------------------------------
+steps:
+  # ------------------------------------------
+  # check out files tracked by git
+  # ------------------------------------------
+  - name: Checkout
+    uses: actions/checkout@v4
 
-# ------------------------------------------------
-# this workflow will run
-# • anytime a commit is made to `in-progress`
-# • anytime a pull request is opened against main
-# ------------------------------------------------
-on:
-  push:
-    branches:
-      - 'in-progress'
-  pull_request:
-    branches:
-      - 'main'
+  # ------------------------------------------
+  # set up pnpm
+  # ------------------------------------------
+  - name: Setup pnpm
+    uses: pnpm/action-setup@v4
+    with:
+      version: latest
 
-jobs:
-  test:
-    # --------------------------------------------
-    # workflow runs on an ubuntu image
-    # --------------------------------------------
-    runs-on: ubuntu-latest
-    container:
-      image: node:18  # Use Docker container to bypass action caching
+  # ------------------------------------------
+  # find node version
+  # ------------------------------------------
+  - name: Determine node version
+    id: nvm
+    run: |
+      if [ -f .nvmrc ]; then
+        echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      fi
 
-    # --------------------------------------------
-    # define the steps we want to run
-    # --------------------------------------------
-    steps:
-      # ------------------------------------------
-      # manual git checkout to avoid actions/checkout cache
-      # ------------------------------------------
-      - name: Checkout code
-        run: |
-          apt-get update && apt-get install -y git
-          git clone https://github.com/${{ github.repository }}.git .
-          git checkout ${{ github.sha }}
+  # ------------------------------------------
+  # setup node env (no built-in cache)
+  # ------------------------------------------
+  - name: Setup node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: ${{ steps.nvm.outputs.NVMRC }}
 
-      # ------------------------------------------
-      # find node version (keeping your NVMRC reference)
-      # ------------------------------------------
-      - name: Determine node version
-        run: test -f .nvmrc && echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-        id: nvm
+  # ------------------------------------------
+  # manual pnpm cache (safe-fail on 503)
+  # ------------------------------------------
+  - name: Get pnpm store path
+    id: pnpm-store
+    run: echo "STORE=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
-      # ------------------------------------------
-      # install specific node version if different
-      # ------------------------------------------
-      - name: Verify Node version
-        run: |
-          echo "Required: ${{ steps.nvm.outputs.NVMRC }}"
-          echo "Current: $(node --version)"
+  - name: Cache pnpm store
+    uses: actions/cache@v4
+    with:
+      path: ${{ steps.pnpm-store.outputs.STORE }}
+      key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      restore-keys: |
+        ${{ runner.os }}-pnpm-store-
+    continue-on-error: true
 
-      # ------------------------------------------
-      # install pnpm
-      # ------------------------------------------
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
+  # ------------------------------------------
+  # install dependencies
+  # ------------------------------------------
+  - name: Install dependencies
+    run: pnpm install
 
-      # ------------------------------------------
-      # install dependencies
-      # ------------------------------------------
-      - name: Install dependencies
-        run: pnpm install
+  # ------------------------------------------
+  # check formatting
+  # ------------------------------------------
+  - name: Run formatter
+    run: pnpm format
 
-      # ------------------------------------------
-      # check formatting
-      # ------------------------------------------
-      - name: Run formatter
-        run: pnpm format
+  # ------------------------------------------
+  # check linting
+  # ------------------------------------------
+  - name: Run linter
+    run: pnpm lint
 
-      # ------------------------------------------
-      # check linting
-      # ------------------------------------------
-      - name: Run linter
-        run: pnpm lint
+  # ------------------------------------------
+  # run unit tests
+  # ------------------------------------------
+  - name: Run unit tests
+    run: pnpm test
 
-      # ------------------------------------------
-      # run unit tests
-      # ------------------------------------------
-      - name: Run unit tests
-        run: pnpm test
-
-      # ------------------------------------------
-      # build assets
-      # ------------------------------------------
-      - name: Build assets
-        run: pnpm build
+  # ------------------------------------------
+  # build assets
+  # ------------------------------------------
+  - name: Build assets
+    run: pnpm build
