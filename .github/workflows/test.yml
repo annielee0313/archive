@@ -1,87 +1,39 @@
---- # ------------------------------------------------
-# ------------------------------------------------
-# test workflow
 name: Test
-
-# ------------------------------------------------
-# this workflow will run
-# • anytime a commit is made to `in-progress`
-# • anytime a pull request is opened against main
-# ------------------------------------------------
 on:
   push:
-    branches:
-      - 'in-progress'
+    branches: [ in-progress ]
   pull_request:
-    branches:
-      - 'main'
+    branches: [ main ]
 
 jobs:
   test:
-    # --------------------------------------------
-    # workflow runs on an ubuntu image
-    # --------------------------------------------
     runs-on: ubuntu-latest
 
-    # --------------------------------------------
-    # define the steps we want to run
-    # --------------------------------------------
+    # Run all steps inside a Node Docker container—no Actions caching at all
+    container:
+      image: node:18
+
     steps:
-      # ------------------------------------------
-      # check out files tracked by git
-      # ------------------------------------------
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # ------------------------------------------
-      # set up pnpm
-      # ------------------------------------------
-      - uses: pnpm/action-setup@v4
-        with:
-          version: latest
+      - name: Verify Node version
+        run: node --version
 
-      # ------------------------------------------
-      # find node version
-      # ------------------------------------------
-      - name: Determine node version
-        run: test -f .nvmrc && echo ::set-output name=NVMRC::$(cat .nvmrc)
-        id: nvm
+      - name: Install pnpm
+        run: npm install -g pnpm@latest
 
-      # ------------------------------------------
-      # setup node env
-      # ------------------------------------------
-      - name: Setup node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '${{ steps.nvm.outputs.NVMRC }}'
-          cache: 'pnpm'
-
-      # ------------------------------------------
-      # install dependencies
-      # ------------------------------------------
       - name: Install dependencies
         run: pnpm install
 
-      # ------------------------------------------
-      # check formatting
-      # ------------------------------------------
       - name: Run formatter
         run: pnpm format
 
-      # ------------------------------------------
-      # check linting
-      # ------------------------------------------
       - name: Run linter
         run: pnpm lint
 
-      # ------------------------------------------
-      # run unit tests
-      # ------------------------------------------
       - name: Run unit tests
         run: pnpm test
 
-      # ------------------------------------------
-      # build assets
-      # ------------------------------------------
       - name: Build assets
         run: pnpm build

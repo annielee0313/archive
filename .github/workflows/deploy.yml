@@ -10,7 +10,7 @@ name: Deploy
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 jobs:
   deploy:
@@ -19,20 +19,18 @@ jobs:
     # --------------------------------------------
     runs-on: ubuntu-latest
 
-    # --------------------------------------------
-    # define the steps we want to run
-    # --------------------------------------------
     steps:
       # ------------------------------------------
       # check out files tracked by git
       # ------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # ------------------------------------------
       # set up pnpm
       # ------------------------------------------
-      - uses: pnpm/action-setup@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: latest
 
@@ -40,17 +38,19 @@ jobs:
       # find node version
       # ------------------------------------------
       - name: Determine node version
-        run: test -f .nvmrc && echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
+        run: |
+          if [ -f .nvmrc ]; then
+            echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+          fi
 
       # ------------------------------------------
-      # setup node env
+      # setup node.js (no cache parameter)
       # ------------------------------------------
-      - name: Setup node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.nvm.outputs.NVMRC }}'
-          cache: 'pnpm'
+          node-version: ${{ steps.nvm.outputs.NVMRC }}
 
       # ------------------------------------------
       # install dependencies
@@ -83,10 +83,9 @@ jobs:
         run: pnpm build
 
       # ------------------------------------------
-      # deploy: this step pushes our dist folder
-      # to github pages
+      # deploy: this step pushes our dist folder to GitHub Pages
       # ------------------------------------------
-      - name: Deploy to github pages
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
