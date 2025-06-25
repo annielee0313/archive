@@ -1,44 +1,62 @@
 name: Test
 on:
   push:
-    branches:
-      - in-progress
+    branches: [ in-progress ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      # checkout
+      # ------------------------------------------
+      # checkout repository
+      # ------------------------------------------
       - name: Checkout
         uses: actions/checkout@v4
 
-      # determine node version
+      # ------------------------------------------
+      # read Node version from .nvmrc
+      # ------------------------------------------
       - name: Determine node version
         id: nvm
         run: |
-          if [ -f .nvmrc ]; then
-            echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-          fi
+          echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
 
-      # setup node (no built-in cache)
+      # ------------------------------------------
+      # setup Node.js (disable internal cache)
+      # ------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvm.outputs.NVMRC }}
           cache: 'none'
 
-      # install pnpm manually (avoids pnpm/action‐setup caching)
+      # ------------------------------------------
+      # cache pnpm store (safe-fail on 503)
+      # ------------------------------------------
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+        continue-on-error: true
+
+      # ------------------------------------------
+      # install pnpm and dependencies
+      # ------------------------------------------
       - name: Install pnpm
         run: npm install -g pnpm@latest
 
-      # install deps & run tasks
       - name: Install dependencies
         run: pnpm install
 
+      # ------------------------------------------
+      # run tasks
+      # ------------------------------------------
       - name: Run formatter
         run: pnpm format
 
