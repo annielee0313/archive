@@ -1,0 +1,28 @@
+{
+  "year": 2022,
+  "title": "2022 Keynotes",
+  "department": "MS Data Visualization",
+  "description": "",
+
+  "location": "Online",
+  "date": "2022-05-18",
+  "time": "5:00PM",
+  "url": "",
+
+  "students": [
+    "Molly Cook",
+    "Juliet Craig",
+    "Gísli Gudjónsson",
+    "Jiahui(Jessie) Han",
+    "Yann Kerblat",
+    "Yoana Kosturska",
+    "Baihan Lin",
+    "Wenqin Lu",
+    "Shea Molloy",
+    "Omar Nema",
+    "Jeremy Odell",
+    "Kasey Zhuravlev"
+  ],
+  "video_source_url": "/media/2022keynotes.mp4",
+  "video_embed_html": "<video controls preload='auto' src='/media/2022keynotes.mp4'></video>"
+}
