@@ -9,8 +9,7 @@
     "preview": "astro preview",
     "format": "prettier --write ./src/**/*.{js,cjs,mjs,json,tsx,ts,json}",
     "lint": "eslint {app,scripts}/*.{js,mjs,vue}",
-    "test": "jest",
-    "validate": "node ./scripts/validate-data.mjs"
+    "test": "jest"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
