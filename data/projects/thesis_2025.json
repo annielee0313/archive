@@ -110,6 +110,20 @@
     "year": 2025
   },
   {
+    "author": ["Harshita Chakravadhanula"],
+    "category": ["thesis"],
+    "description": "This project explores female characters in literary epics across time and culture, analyzing their traits to uncover recurring archetypes. What do cultures expect of women—and how much do those expectations differ across civilizations? By studying epics as repositories of collective values, this research investigates how idealized models of femininity are constructed. It asks whether these cultural ideals become internalized, shaping the inner voice through which women learn to govern themselves. Drawing from a diverse and global selection of epic texts, the project maps the persistence and evolution of feminine archetypes across mythology, religion, nationhood, and time.",
+    "image": ["thesis-2025/Harshita.png"],
+    "project_repo": "https://github.com/hushbrush/thesis",
+    "project_url": "https://hushbrush.github.io/thesis/",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "Cookie Cutter Women",
+    "video": [],
+    "year": 2025
+  },
+  {
     "author": ["Nour Al Safadi"],
     "category": ["thesis"],
     "description": "The project investigates the rhetoric of Germany’s far-right party. It analyzes transcribed speeches from the party’s official YouTube channel using artificial intelligence, word frequency analysis, and natural language processing (NLP). Additionally, it introduces a predictive AI model trained on thousands of far-right speeches and the Left Party’s election program to classify how closely a speech aligns with far-right discourse. The project reveals how language fosters political division and explores the potential of AI to identify early warning signs of right-wing radicalization.",
@@ -123,6 +137,20 @@
     "video": [
       "https://github.com/NourSaf/MSDV-thesis-25/blob/main/public/demovideo/demo.mp4?raw=true"
     ],
+    "year": 2025
+  },
+  {
+    "author": ["Katherine Chui"],
+    "category": ["thesis"],
+    "description": "Film is a multisensory and interdisciplinary art form that can be visualized into a more accessible and immersive experience. I hope this project can be a space for exploring and enjoying the visual beauty of sound, and the intersection of music, narrative, and design.",
+    "image": ["thesis-2025/Katherine.png"],
+    "project_repo": "https://github.com/chuik633/SoundStories",
+    "project_url": "https://chuik633.github.io/SoundStories/#about",
+    "student_url": "https://www.kchuiart.com/home",
+    "subtitle": "",
+    "tags": [],
+    "title": "Sound Stories: Visualizing Music in Film",
+    "video": [],
     "year": 2025
   },
   {
@@ -169,6 +197,20 @@
     "video": [
       "https://github.com/stephhwu/parsonsthesis-2025/blob/main/public/steph-thesis-2025-video.mp4?raw=true"
     ],
+    "year": 2025
+  },
+  {
+    "author": ["Ian Yu"],
+    "category": ["thesis"],
+    "description": "Public understanding of AI's energy cost is still at its infancy. Many users remain unaware that the AI query 'costs' anything beyond their internet connection. This project is an exploration of energy consumption of AI.",
+    "image": ["thesis-2025/Ian.png"],
+    "project_repo": "",
+    "project_url": "",
+    "student_url": "",
+    "subtitle": "",
+    "tags": [],
+    "title": "In the Age of AI",
+    "video": [],
     "year": 2025
   }
 ]
