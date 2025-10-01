@@ -23,6 +23,5 @@
     "Jeremy Odell",
     "Kasey Zhuravlev"
   ],
-  "video_source_url": "/media/2022keynotes.mp4",
-  "video_embed_html": "<video controls preload='auto' src='/media/2022keynotes.mp4'></video>"
+  "video_embed_html": "<iframe src=\"https://player.vimeo.com/video/1102071735?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" title=\"2022 MS Data Visualization Keynotes | Parsons at The New School\"></iframe>"
 }
