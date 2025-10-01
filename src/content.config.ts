@@ -13,22 +13,24 @@ export const projectSchema = z
     student_url: z.string(),
     project_url: z.string(),
     project_repo: z.string(),
-    category: z.array(z.string().transform((c) => {
-      if(c === 'ms1') {
-        return 'Major Studio'
-      }
-      if(c === 'ms2') {
-        return 'Major Studio'
-      }
-      if(c === 'thesis') {
-        return 'Thesis'
-      }
-      return c
-    })),
-    tags: z.array(z.string()).transform(arr => {
+    category: z.array(
+      z.string().transform((c) => {
+        if (c === 'ms1') {
+          return 'Major Studio'
+        }
+        if (c === 'ms2') {
+          return 'Major Studio'
+        }
+        if (c === 'thesis') {
+          return 'Thesis'
+        }
+        return c
+      })
+    ),
+    tags: z.array(z.string()).transform((arr) => {
       // transform art to arts
-      return arr.map(t => {
-        if(t === 'art') {
+      return arr.map((t) => {
+        if (t === 'art') {
           return 'arts'
         }
         return t
@@ -52,10 +54,17 @@ export const projectSchema = z
 
 export type ProjectData = z.infer<typeof projectSchema>
 
-export function createProjectId(project: { title: string, year: number, author: string[] }) {
+export function createProjectId(project: {
+  title: string
+  year: number
+  author: string[]
+}) {
   const title = project.title.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
   const year = project.year.toString().replace(/[^A-Za-z0-9]/g, '-')
-  const author = project.author.join('-').toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+  const author = project.author
+    .join('-')
+    .toLowerCase()
+    .replace(/[^A-Za-z0-9]/g, '-')
 
   // replace any duplicate dashes with a single dash
   return `${year}-${author}-${title}`.replace(/-+/g, '-')
@@ -99,8 +108,7 @@ export const keynotesSchema = z.object({
   time: z.string(),
   url: z.string(),
   students: z.array(z.string()),
-  video_source_url: z.string(),
-  video_embed_html: z.string()
+  video_embed_html: z.string(),
 })
 
 export type KeynoteData = z.infer<typeof keynotesSchema>
