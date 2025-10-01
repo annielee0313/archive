@@ -8,7 +8,7 @@
     "project_url": "https://lisasquinley.github.io/Thesis/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["climate-change", "environment", "education"],
     "title": "Droughts! Floods! Fires!",
     "video": [
       "https://github.com/LisaSQuinley/Thesis/blob/main/demo.mp4?raw=true"
@@ -24,7 +24,7 @@
     "project_url": "https://takumanken.github.io/thesis/application/frontend/index.html",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["data", "technology", "interactive"],
     "title": "ASK NYC: NYC Open Data Explorer",
     "video": [
       "https://github.com/takumanken/thesis/blob/main/demo.mp4?raw=true"
@@ -40,7 +40,7 @@
     "project_url": "https://joshstrupp-dot-com.github.io/the-problem-presentation/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["culture", "media", "social-justice"],
     "title": "The Problem With Fixing Yourself",
     "video": [
       "https://github.com/joshstrupp-dot-com/the-problem-presentation/blob/main/demo.mp4?raw=true"
@@ -56,7 +56,7 @@
     "project_url": "https://jjeeong17.github.io/thesis01/#/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["health", "medicine", "education"],
     "title": "Safe Alone, Risky Together",
     "video": [
       "https://github.com/jjeeong17/thesis01/blob/main/demo.mp4?raw=true"
@@ -72,7 +72,7 @@
     "project_url": "https://daiarose.github.io/msdv-thesis/#/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["education", "gender", "human-rights"],
     "title": "The Missing Chapter: Queer Youth in Sex Ed",
     "video": ["https://daiarose.github.io/msdv-thesis/demo.mp4"],
     "year": 2025
@@ -86,7 +86,7 @@
     "project_url": "https://monsichasris.github.io/thesis/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["culture", "urban", "community"],
     "title": "Grocery Signery",
     "video": [
       "https://github.com/monsichasris/thesis/blob/main/demo.mp4?raw=true"
@@ -102,7 +102,7 @@
     "project_url": "https://xuanx1.github.io/parsonsThesis-xuan/04final/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["transportation", "urban", "mapping"],
     "title": "Trains, Lanes, and Data Grains: Mapping Southeast Asia’s Future",
     "video": [
       "https://github.com/xuanx1/parsonsThesis-xuan/blob/main/04final/demo.mp4?raw=true"
@@ -118,7 +118,7 @@
     "project_url": "https://hushbrush.github.io/thesis/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["women", "culture", "religion"],
     "title": "Cookie Cutter Women",
     "video": [],
     "year": 2025
@@ -132,7 +132,7 @@
     "project_url": "https://noursaf.github.io/MSDV-thesis-25/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["politics", "technology", "human-rights"],
     "title": "Language of Division",
     "video": [
       "https://github.com/NourSaf/MSDV-thesis-25/blob/main/public/demovideo/demo.mp4?raw=true"
@@ -148,7 +148,7 @@
     "project_url": "https://chuik633.github.io/SoundStories/#about",
     "student_url": "https://www.kchuiart.com/home",
     "subtitle": "",
-    "tags": [],
+    "tags": ["art", "sound", "media"],
     "title": "Sound Stories: Visualizing Music in Film",
     "video": [],
     "year": 2025
@@ -162,7 +162,7 @@
     "project_url": "https://annielee0313.github.io/msdv-thesis/ ",
     "student_url": "https://ayynniee.com/",
     "subtitle": "",
-    "tags": [],
+    "tags": ["gender", "culture", "interactive"],
     "title": "Fluidnotes: Gender and Fragrance",
     "video": [],
     "year": 2025
@@ -176,7 +176,7 @@
     "project_url": "",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["human-rights", "politics", "media"],
     "title": "Narratives of Truth and Denial",
     "video": [
       "https://github.com/animatevosian398/thesis-2025/blob/main/public/Demo.mp4?raw=true"
@@ -192,7 +192,7 @@
     "project_url": "https://stephhwu.github.io/parsonsthesis-2025/",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["nature", "science", "storytelling"],
     "title": "Dogs with Jobs",
     "video": [
       "https://github.com/stephhwu/parsonsthesis-2025/blob/main/public/steph-thesis-2025-video.mp4?raw=true"
@@ -208,7 +208,7 @@
     "project_url": "",
     "student_url": "",
     "subtitle": "",
-    "tags": [],
+    "tags": ["technology", "environment", "data"],
     "title": "In the Age of AI",
     "video": [],
     "year": 2025
