@@ -32,8 +32,8 @@ export const ProjectFilters = ({
   onSearchChange,
 }: FilterProps) => {
   return (
-    <div className="w-full flex items-center justify-start gap-6">
-      <div className={'h-14 flex items-center gap-2 mr-auto'}>
+    <div className="w-full flex items-center justify-between gap-6">
+      <div className={'flex-1 flex items-center gap-2 px-2 py-1'}>
         <SearchIcon className={'size-6 opacity-20'} />
         <input
           type="text"
