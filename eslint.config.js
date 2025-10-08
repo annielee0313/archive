@@ -1,7 +1,9 @@
+import eslintRecommended from 'eslint/conf/eslint-recommended.js';
+
 export default [
+  eslintRecommended,
   {
-    files: ['**/*.{js,mjs,vue}'],
-    extends: ['eslint:recommended'],
-    // Add your rules/config here
+    files: ['**/*.js'],
+    rules: { /* ... */ }
   }
 ];
