@@ -35,16 +35,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install ESLint v9+ and rules
-        run: |
-          pnpm add -D eslint@latest @eslint/js
-
-      - name: Ensure flat ESLint config
-        run: |
-          if [ ! -f eslint.config.js ]; then
-            echo "module.exports = [require('@eslint/js').configs.recommended];" > eslint.config.js
-          fi
-
       - name: Run formatter
         run: pnpm format
 
