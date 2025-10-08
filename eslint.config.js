@@ -1,9 +1,2 @@
-import eslintRecommended from 'eslint/conf/eslint-recommended.js';
-
-export default [
-  eslintRecommended,
-  {
-    files: ['**/*.js'],
-    rules: { /* ... */ }
-  }
-];
+// eslint.config.js
+module.exports = [require('@eslint/js').configs.recommended];
