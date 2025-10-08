@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -43,9 +45,6 @@ jobs:
 
       - name: Run unit tests
         run: pnpm test
-
-      - name: Pull images from git lfs
-        run: git lfs pull
 
       - name: Build assets
         run: pnpm build
