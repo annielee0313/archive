@@ -92,7 +92,7 @@ const filteredAuthorProjects = allProjects
               title={project.data.title}
               poster={
                 project.data.image?.[0]
-                  ? `${base}images/${project.data.image[0]}`
+                  ? `${base}/images/${project.data.image[0]}`
                   : undefined
               }
             />
@@ -160,7 +160,7 @@ const filteredAuthorProjects = allProjects
           <div class="grid grid-cols-1 gap-4">
             {project.data.image.map((img) => (
               <img
-                src={`${base}images/${img}`}
+                src={`${base}/images/${img}`}
                 alt={`${project.data.title} project image`}
                 class="w-full h-auto rounded-lg object-cover [box-shadow:0_0_0_1px_rgba(0,0,0,0.1)]"
               />

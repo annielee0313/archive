@@ -16,7 +16,7 @@ export function ProjectCard({ project }: { project: ProjectData }) {
         >
           {isInView && (
             <img
-              src={`${base}images/${project.image}`}
+              src={`${base}/images/${project.image}`}
               alt={project.title}
               className="w-full h-full object-cover"
               loading="lazy"
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: { project: ProjectData }) {
       </div>
 
       <a
-        href={`${base}projects/${project.id}`}
+        href={`${base}/projects/${project.id}`}
         className="block p-4 text-sm absolute inset-0"
       >
         <span className="sr-only">View Project</span>
