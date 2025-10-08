@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 export function ProjectCard({ project }: { project: ProjectData }) {
   const [isInView, setIsInView] = useState(false)
-  const baseUrl = import.meta.env.BASE_URL
 
   return (
     <div className="relative h-full flex flex-col">
@@ -16,7 +15,7 @@ export function ProjectCard({ project }: { project: ProjectData }) {
         >
           {isInView && (
             <img
-              src={`${baseUrl}images/${project.image}`}
+              src={`/images/${project.image}`}
               alt={project.title}
               className="w-full h-full object-cover"
               loading="lazy"
@@ -46,7 +45,7 @@ export function ProjectCard({ project }: { project: ProjectData }) {
       </div>
 
       <a
-        href={`${baseUrl}projects/${project.id}`}
+        href={`/projects/${project.id}`}
         className="block p-4 text-sm absolute inset-0"
       >
         <span className="sr-only">View Project</span>
