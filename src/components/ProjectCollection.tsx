@@ -87,6 +87,7 @@ export default function FilterableProjects({ projects }: Props) {
         project.title,
         project.description,
         ...project.tags,
+        ...project.author,
       ]
         .join(' ')
         .toLowerCase()
