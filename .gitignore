@@ -165,3 +165,7 @@ pnpm-debug.log*
 *.sw?
 
 .astro
+
+# Large video files (too big for GitHub Pages)
+public/media/**/*.mp4
+*.mp4
