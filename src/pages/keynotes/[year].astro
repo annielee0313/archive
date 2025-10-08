@@ -4,6 +4,8 @@ import { getCollection, getEntry } from 'astro:content'
 import { ProjectCard } from '@/components/ProjectCard'
 import { VideoPlayer } from '@/components/VideoPlayer'
 
+const base = import.meta.env.BASE_URL
+
 export async function getStaticPaths() {
   const keynotes = await getCollection('keynotes')
 
@@ -30,7 +32,7 @@ const relatedProjects = allProjects
 <MainLayout>
   <div class="container mx-auto">
     <div class="mb-8">
-      <a href="/keynotes" class="inline-flex items-center rounded-full h-10 px-3 bg-neutral-100 text-neutral-800 font-medium">
+      <a href={`${base}/keynotes`} class="inline-flex items-center rounded-full h-10 px-3 bg-neutral-100 text-neutral-800 font-medium">
         ← Keynotes
       </a>
     </div>
