@@ -27,33 +27,13 @@ Optional:
 
 ## Development Tooling
 
-### Vue (Version 3)
+### Astro
 
-Version 3 of Vue includes different component APIs than Vue 2, including a new **composition api** flow.
+[TBD]
 
-- [Vue 3 Composition API](https://vuejs.org/api/composition-api-setup.html#composition-api-setup)
+### TypeScript
 
-### Vite
-
-[Vite](https://vitejs.dev) is a tool that provides a development server and bundles JavaScript modules into publishable assets. You can configure Vite through the `vite.config.mjs` file.
-
-- [Vite Guide](https://vitejs.dev/guide/)
-- [Vite Config](https://vitejs.dev/config/)
-
-### ESM (ECMAScript Modules)
-
-This project uses ESM (or ECMAScript modules). Node.js will defaults to using CommonJS modules but will use ESM if your file extension ends in `.mjs` and you have `"type": "module"` set in `package.json`
-
-> **Warning**: Use `.mjs` extension instead of `.js`. If CommonJS is needed, use `.cjs`. Do not remove `"type": "module"` from `package.json`
-
-- [Node.js ESM Documentation](https://nodejs.org/api/esm.html#modules-ecmascript-modules)
-
-### Type Annotations
-
-If you open this repository using [Visual Studio Code](https://code.visualstudio.com), you will notice that it provides **type checking**. This is a helpful way to avoid bugs like if you pass a string into a function that expects a number. To configure this behavior, you can adjust the `jsconfig.json` file.
-
-- [jsconfig.json Documentation](https://code.visualstudio.com/docs/languages/javascript#_javascript-projects-jsconfigjson)
-- [Type Checking Documentation](https://code.visualstudio.com/docs/languages/javascript#_type-checking)
+[TBD]
 
 ### pnpm
 
@@ -70,11 +50,11 @@ pnpm dev
 | script name | description                                                      | why is this helpful                                                                      |
 | :---------- | :--------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
 | dev         | starts development server                                        | gives us a live preview of our site that we can view in the browser                      |
+| build       | builds static deployment assets                                  | compiles framework specific files (like .vue) to browser compatible javascript           |
+| preview     | previews the built site                                          | gives us a live preview of our site that we can view in the browser                      |
 | format      | runs prettier to format files according to .pretterrc.yml config | keeps code style consistent and reduces the number of line changes between Pull Requests |
 | lint        | runs eslint to check for code errors and bugs                    | helps catch errors like typos before we build the site                                   |
 | test        | runs jest to execute unit tests to check components              | checks that recent changes don't change how our components function                      |
-| validate    | validates that all JSON files in /data follow the correct schema | ensures that there aren't any unknown or missing properties in our JSON                  |
-| build       | builds static deployment assets                                  | compiles framework specific files (like .vue) to browser compatible javascript           |
 
 ## GitHub Actions
 
@@ -83,12 +63,11 @@ This repository is set up to use GitHub Actions to check the status of commits m
 | workflow | description                                                                                                    |
 | :------- | :------------------------------------------------------------------------------------------------------------- |
 | test     | runs formatter, linter, and ensures that build process do not throw any errors                                 |
-| validate | checks that all JSON files in /data folder use the correct schema and don't have unknown or missing properties |
 | deploy   | builds web assets and pushes automatically to github pages branch                                              |
 
 ## Data
 
-Project data is stored in `./data/projects.json`. The file follows the schema defined in `./data/schema.json` which follows a [JSON Schema](https://json-schema.org/) specification.
+Project data is stored in `./src/data/projects/*.json`.
 
 The projects array follows this template:
 
@@ -106,12 +85,6 @@ The projects array follows this template:
    "video": "<VIDEO LINK>",
    "year": YYYY
 }
-```
-
-The `validate` GitHub workflow will run anytime a commit is made (including pull requests). You can also validate before pushing code by running
-
-```sh
-pnpm validate
 ```
 
 ## Local Development
@@ -190,26 +163,13 @@ Sometimes, you mess up and need to go back to a previous commit. [Use `revert`](
 
 # Helpful resources
 
-Vite
+Astro
 
-- [Vite Guide](https://vitejs.dev/guide/)
-- [Vite Config](https://vitejs.dev/config/)
-
-Node.js
-
-- [ESM Modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules)
-
-Vue
-
-- [Vue Documentation](https://vuejs.org/guide/introduction.html)
+- [Astro Documentation](https://docs.astro.build/)
 
 pnpm
 
 - [Getting Started](https://pnpm.io/installation)
-
-JSON Schema
-
-- [Understanding JSON Schema](https://json-schema.org/understanding-json-schema/)
 
 GitHub
 

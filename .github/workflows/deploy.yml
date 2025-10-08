@@ -77,6 +77,12 @@ jobs:
         run: pnpm test
 
       # ------------------------------------------
+      # pull images/videos
+      # ------------------------------------------
+      - name: Pull images from git lfs
+        run: git lfs pull
+
+      # ------------------------------------------
       # build assets
       # ------------------------------------------
       - name: Build assets
