@@ -1,6 +1,1 @@
-// eslint.config.mjs
-import js from '@eslint/js';
-
-export default [
-  js.configs.recommended
-];
+module.exports = [require('@eslint/js').configs.recommended];
