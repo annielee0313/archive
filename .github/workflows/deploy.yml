@@ -18,6 +18,9 @@ jobs:
         with:
           lfs: false
           fetch-depth: 1
+      
+      - name: Fetch LFS files
+        run: git lfs pull --include="public/**"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
