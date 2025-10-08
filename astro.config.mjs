@@ -6,7 +6,8 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://visualizedata.github.io',
-  base: process.env.NODE_ENV === 'production' ? '/archive' : '/',
+  // Use /archive base for GitHub Actions builds, / for local dev
+  base: process.env.GITHUB_ACTIONS ? '/archive' : '/',
   
   vite: {
     plugins: [tailwindcss()],
