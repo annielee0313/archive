@@ -1,10 +1,10 @@
 --- # ------------------------------------------------
 # ------------------------------------------------
-# deploy workflow
-name: Deploy
+on:
+  push:
+    branches:
+      - main
 
-# ------------------------------------------------
-# this workflow will run
 # • anytime a commit is pushed to the main branch
 # ------------------------------------------------
 on:
@@ -45,7 +45,7 @@ on:
       # ------------------------------------------
       # setup node.js (no cache parameter)
       # ------------------------------------------
-      - name: Setup Node.js
+          node-version: ${{ steps.nvm.outputs.NVMRC }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvm.outputs.NVMRC }}
